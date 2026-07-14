@@ -1,0 +1,59 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 3,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784003653.808688,
+            "stop": 1784003653.908419
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_report_structure",
+                "status": "passed",
+                "duration": 0.0011124269999527314,
+                "start": 1784003653.8570108,
+                "stop": 1784003653.8600652,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_total_requests",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0011277310002242302,
+                "start": 1784003653.8604958,
+                "stop": 1784003653.8952968,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_total_requests():\n        \"\"\"Criterion 2: total_requests equals the number of non-blank lines in the log.\"\"\"\n        data = json.loads(REPORT_PATH.read_text())\n>       assert data[\"total_requests\"] == EXPECTED_TOTAL_REQUESTS, (\n            f\"Criterion 2 FAIL: expected total_requests={EXPECTED_TOTAL_REQUESTS}, \"\n            f\"got {data['total_requests']!r}\"\n        )\nE       AssertionError: Criterion 2 FAIL: expected total_requests=6, got 99\nE       assert 99 == 6\n\n/tests/test_outputs.py:41: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_outputs.py::test_unique_ips",
+                "status": "passed",
+                "duration": 0.001008017000003747,
+                "start": 1784003653.8957481,
+                "stop": 1784003653.8982866,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_top_path",
+                "status": "passed",
+                "duration": 0.005949686999883852,
+                "start": 1784003653.8986611,
+                "stop": 1784003653.9069784,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

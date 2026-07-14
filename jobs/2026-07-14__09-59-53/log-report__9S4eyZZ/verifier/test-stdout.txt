@@ -1,0 +1,119 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 4 items
+
+../tests/test_outputs.py FFFF                                            [100%]
+
+=================================== FAILURES ===================================
+____________________________ test_report_structure _____________________________
+
+    def test_report_structure():
+        """Criterion 1: /app/report.json exists and contains valid JSON with keys
+        total_requests, unique_ips, and top_path."""
+>       assert REPORT_PATH.exists(), (
+            "Criterion 1 FAIL: /app/report.json does not exist"
+        )
+E       AssertionError: Criterion 1 FAIL: /app/report.json does not exist
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/report.json').exists
+
+/tests/test_outputs.py:25: AssertionError
+_____________________________ test_total_requests ______________________________
+
+    def test_total_requests():
+        """Criterion 2: total_requests equals the number of non-blank lines in the log."""
+>       data = json.loads(REPORT_PATH.read_text())
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/app/report.json'), mode = 'r', buffering = -1
+encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/report.json'
+
+/usr/local/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_______________________________ test_unique_ips ________________________________
+
+    def test_unique_ips():
+        """Criterion 3: unique_ips equals the number of distinct client IP addresses."""
+>       data = json.loads(REPORT_PATH.read_text())
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/app/report.json'), mode = 'r', buffering = -1
+encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/report.json'
+
+/usr/local/lib/python3.12/pathlib.py:1013: FileNotFoundError
+________________________________ test_top_path _________________________________
+
+    def test_top_path():
+        """Criterion 4: top_path equals the URL path that appears in the most requests."""
+>       data = json.loads(REPORT_PATH.read_text())
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/app/report.json'), mode = 'r', buffering = -1
+encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/report.json'
+
+/usr/local/lib/python3.12/pathlib.py:1013: FileNotFoundError
+=========================== short test summary info ============================
+FAILED ../tests/test_outputs.py::test_report_structure - AssertionError: Crit...
+FAILED ../tests/test_outputs.py::test_total_requests - FileNotFoundError: [Er...
+FAILED ../tests/test_outputs.py::test_unique_ips - FileNotFoundError: [Errno ...
+FAILED ../tests/test_outputs.py::test_top_path - FileNotFoundError: [Errno 2]...
+============================== 4 failed in 0.15s ===============================
